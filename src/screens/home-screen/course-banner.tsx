@@ -1,12 +1,5 @@
-import {useEffect} from 'react';
 import {Image, Text, View, StyleSheet, TextProps} from 'react-native';
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withDelay,
-  withTiming,
-  Easing,
-} from 'react-native-reanimated';
+import LinearGradient from 'react-native-linear-gradient';
 
 const images = {
   xing: require('../../../assets/images/11.五角星.png'),
@@ -16,74 +9,84 @@ const images = {
   cover: require('../../../assets/images/12.课程封面.png'),
 };
 
-export interface CourseBannerProps {}
-export function CourseBanner({}: CourseBannerProps) {
-  // const opacity = useSharedValue(0);
-  //
-  // // 在组件挂载时触发动画
-  // useEffect(() => {
-  //   // scale.value = withTiming(0, {
-  //   //   duration: 500, // 动画时长
-  //   //   easing: Easing.inOut(Easing.ease), // 缓动函数
-  //   // });
-  //   opacity.value = withTiming(1, {
-  //     duration: 500,
-  //     easing: Easing.inOut(Easing.ease),
-  //   });
-  // }, []); // 空依赖数组表示只在组件挂载时执行
-  //
-  // const animatedStyle = useAnimatedStyle(
-  //   () => ({
-  //     opacity: opacity.value,
-  //   }),
-  //   [],
-  // );
+export function CourseBanner() {
   return (
-    <Animated.View style={[styles.courseBannerContainer]}>
-      <View style={styles.courseBanner}>
-        <View style={styles.courseBannerHeader}>
-          <Image source={images.xing} style={styles.courseBannerHeaderIcon} />
-          <Text style={styles.courseBannerHeaderTitle}>新课预约</Text>
-        </View>
-        <View style={styles.courseBannerContent}>
-          <Image
-            source={images.cover}
-            style={{
-              width: 120,
-              height: 90,
-            }}
-          />
-          <View
-            style={{
-              paddingHorizontal: 16,
-            }}>
-            <Text
+    <View style={[styles.courseBannerContainer]}>
+      <View style={styles.courseBannerHeader}>
+        <Image source={images.xing} style={styles.courseBannerHeaderIcon} />
+        <Text style={styles.courseBannerHeaderTitle}>新课预约</Text>
+      </View>
+      <LinearGradient
+        start={{x: 0, y: 0}}
+        end={{x: 0, y: 0.8}}
+        colors={['#F8D0D0', '#FFFFFF']}
+        style={{
+          borderRadius: 16,
+          borderWidth: StyleSheet.hairlineWidth,
+          borderColor: 'white',
+        }}>
+        <View style={styles.courseBanner}>
+          <View style={styles.courseBannerContent}>
+            <Image
+              source={images.cover}
               style={{
-                fontSize: 16,
-                fontWeight: 'semibold',
+                width: 120,
+                height: 90,
+              }}
+            />
+            <View
+              style={{
+                paddingHorizontal: 16,
+                paddingVertical: 4,
+                justifyContent: 'space-around',
               }}>
-              C端体验设计全能班
-            </Text>
-            <View style={{flexDirection: 'row', alignItems: 'center', gap: 4}}>
-              <TagItem>体验设计</TagItem>
-              <TagItem>交互设计</TagItem>
-              <TagItem>视觉运营</TagItem>
-            </View>
-            <View>
-              <Text>¥4680.0</Text>
-              <View style={{flexDirection: 'row'}}>
-                <AvatarGroup
-                  data={[images.avatar, images.avatar2, images.avatar3]}
-                  size={20}
-                />
-                <Text>87</Text>
-                <Text>人在学</Text>
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontWeight: 'semibold',
+                }}>
+                C端体验设计全能班
+              </Text>
+              <View
+                style={{flexDirection: 'row', alignItems: 'center', gap: 4}}>
+                <TagItem>体验设计</TagItem>
+                <TagItem>交互设计</TagItem>
+                <TagItem>视觉运营</TagItem>
+              </View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  gap: 12,
+                  justifyContent: 'space-between',
+                }}>
+                <MoenyLabel value={4680} />
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <AvatarGroup
+                    data={[images.avatar, images.avatar2, images.avatar3]}
+                    size={20}
+                  />
+                  <Text style={{color: '#E6933B', fontSize: 12, marginLeft: 6}}>
+                    87
+                  </Text>
+                  <Text style={{color: '#999', fontSize: 12}}>人在学</Text>
+                </View>
               </View>
             </View>
           </View>
         </View>
-      </View>
-    </Animated.View>
+      </LinearGradient>
+    </View>
+  );
+}
+
+function MoenyLabel({value, size = 16}: {value: number; size?: number}) {
+  const color = 'red';
+  return (
+    <View style={{flexDirection: 'row', alignItems: 'flex-end', gap: 2}}>
+      <Text style={{color, fontSize: size * 0.85}}>¥</Text>
+      <Text style={{color, fontSize: size}}>{value.toFixed(1)}</Text>
+    </View>
   );
 }
 
@@ -139,13 +142,10 @@ function AvatarGroup({data, size}: {data: any[]; size: number}) {
 const styles = StyleSheet.create({
   courseBannerContainer: {
     position: 'relative',
-    paddingTop: 20,
   },
   courseBanner: {
-    paddingVertical: 25,
-    // @TODO linter
-    backgroundColor: 'white',
-    // minHeight: 150,
+    paddingTop: 25,
+    paddingBottom: 16,
     paddingHorizontal: 16,
     borderRadius: 16,
   },
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 16,
     width: '100%',
-    // backgroundColor: 'red',
+    zIndex: 10,
     transform: [{translateY: '-50%'}],
   },
   courseBannerHeaderIcon: {
