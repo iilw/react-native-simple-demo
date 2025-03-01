@@ -21,6 +21,7 @@ import {
 } from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {CourseBanner} from './course-banner';
+import LinearGradient from 'react-native-linear-gradient';
 
 const imageBase = '../../../assets/images';
 
@@ -57,8 +58,9 @@ function App(): React.JSX.Element {
   return (
     <View style={[{flex: 1}]}>
       <StatusBar
-      // barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-      // backgroundColor={backgroundStyle.backgroundColor}
+        barStyle="light-content"
+        // barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        // backgroundColor={backgroundStyle.backgroundColor}
       />
       <ScrollView style={{flex: 1}}>
         <ImageBackground source={images.headerBg}>
@@ -104,22 +106,34 @@ function App(): React.JSX.Element {
             paddingTop: 16 + 16,
           }}>
           <View style={styles.bannersContainer}>
-            <View style={styles.bannerItem}>
-              <Text style={styles.bannerItemTitle}>基础课程</Text>
-              <Text style={styles.bannerItemSubtitle}>基础课程</Text>
-              <Image
-                source={images.banner.left}
-                style={styles.bannerItemImage}
-              />
-            </View>
-            <View style={styles.bannerItem}>
-              <Text style={styles.bannerItemTitle}>基础课程</Text>
-              <Text style={styles.bannerItemSubtitle}>基础课程</Text>
-              <Image
-                source={images.banner.right}
-                style={styles.bannerItemImage}
-              />
-            </View>
+            <LinearGradient
+              start={{x: 0, y: 0}}
+              end={{y: 0, x: 1}}
+              colors={['#9ACEF9', '#FFFFFF']}
+              style={{flex: 1, borderRadius: 16}}>
+              <View style={styles.bannerItem}>
+                <Text style={styles.bannerItemTitle}>基础课程</Text>
+                <Text style={styles.bannerItemSubtitle}>基础课程</Text>
+                <Image
+                  source={images.banner.left}
+                  style={styles.bannerItemImage}
+                />
+              </View>
+            </LinearGradient>
+            <LinearGradient
+              start={{x: 0, y: 0}}
+              end={{y: 0, x: 1}}
+              colors={['#9AE6F9', '#FFFFFF']}
+              style={{flex: 1, borderRadius: 16}}>
+              <View style={styles.bannerItem}>
+                <Text style={styles.bannerItemTitle}>基础课程</Text>
+                <Text style={styles.bannerItemSubtitle}>基础课程</Text>
+                <Image
+                  source={images.banner.right}
+                  style={styles.bannerItemImage}
+                />
+              </View>
+            </LinearGradient>
           </View>
           <View style={styles.quickActionContainer}>
             <QuickAction
@@ -370,7 +384,7 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 16,
     maxWidth: 200,
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
     paddingHorizontal: 16,
     justifyContent: 'center',
     overflow: 'hidden',
