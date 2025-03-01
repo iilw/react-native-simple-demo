@@ -1,7 +1,7 @@
 ## React Native 练习题
 
 ### 完成图片
-![1.png](https://github.com/iilw/react-native-simple-demo/blob/main/photos/1.png, "1")
+![1.png](https://github.com/iilw/react-native-simple-demo/blob/main/photos/1.png)
 
 
 ### 感谢
